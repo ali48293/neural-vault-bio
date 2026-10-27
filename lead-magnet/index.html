@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neural Vault • Top 100 AI Tools Database (2026 Edition)</title>
+  <meta name="description" content="The definitive directory of secret AI tools, workflows, and websites curated by Neural Vault.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: rgba(18, 22, 34, 0.7);
+      --card-border: rgba(0, 240, 255, 0.15);
+      --card-hover: rgba(0, 240, 255, 0.4);
+      --primary: #00f0ff;
+      --primary-glow: rgba(0, 240, 255, 0.35);
+      --accent: #7928ca;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      padding: 40px 20px 80px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Top Nav */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 36px;
+    }
+
+    .brand-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .brand-badge img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid var(--primary);
+    }
+
+    .brand-badge span {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.5px;
+    }
+
+    .back-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--primary); }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 5px 14px;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, #00f0ff, #7928ca);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    /* Controls: Search + Categories */
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 32px;
+    }
+
+    .search-bar {
+      position: relative;
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 20px 14px 46px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      background: rgba(18, 22, 34, 0.85);
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 16px var(--primary-glow);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      width: 18px;
+      height: 18px;
+    }
+
+    .category-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .pill-btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .pill-btn:hover, .pill-btn.active {
+      background: var(--primary);
+      color: #000;
+      border-color: var(--primary);
+      box-shadow: 0 2px 10px var(--primary-glow);
+    }
+
+    /* Tools Grid */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .tool-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .tool-card:hover {
+      border-color: var(--card-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px -10px var(--primary-glow);
+      background: rgba(22, 28, 44, 0.85);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .tool-icon {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .pricing-tag {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .pricing-free { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+    .pricing-freemium { background: rgba(0, 240, 255, 0.15); color: var(--primary); }
+    .pricing-trial { background: rgba(255, 184, 0, 0.15); color: #ffb800; }
+
+    .tool-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .tool-cat {
+      font-size: 11px;
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+
+    .tool-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    .card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .affiliate-badge {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .visit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .visit-btn:hover {
+      background: var(--primary);
+      color: #000;
+    }
+
+    /* Stats bar */
+    .counter-info {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <nav class="top-nav">
+      <a href="../index.html" class="brand-badge">
+        <img src="../assets/logo.jpg" alt="Logo">
+        <span>NEURAL VAULT</span>
+      </a>
+      <a href="../index.html" class="back-link">← Back to Link in Bio</a>
+    </nav>
+
+    <header class="hero">
+      <span class="hero-badge">Curated Intelligence</span>
+      <h1>The 2026 <span>Top 100 AI Vault</span></h1>
+      <p>Instant access to high-leverage AI tools, generative engines, and automated workflows to accelerate income and output.</p>
+    </header>
+
+    <div class="controls">
+      <div class="search-bar">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search by tool name, use-case, or keyword..." oninput="filterTools()">
+      </div>
+
+      <div class="category-pills" id="categoryPills">
+        <button class="pill-btn active" onclick="setCategory('all')">All Tools</button>
+        <button class="pill-btn" onclick="setCategory('Video & Shorts')">Video & Shorts</button>
+        <button class="pill-btn" onclick="setCategory('Audio & Voice')">Audio & Voice</button>
+        <button class="pill-btn" onclick="setCategory('Automation & No-Code')">Automation & No-Code</button>
+        <button class="pill-btn" onclick="setCategory('Presentations & Docs')">Presentations & Docs</button>
+        <button class="pill-btn" onclick="setCategory('Research & Search')">Research & Search</button>
+        <button class="pill-btn" onclick="setCategory('Coding & Web')">Coding & Web</button>
+        <button class="pill-btn" onclick="setCategory('Design & Images')">Design & Images</button>
+      </div>
+    </div>
+
+    <div class="counter-info" id="counterText">Showing all tools</div>
+
+    <div class="tools-grid" id="toolsGrid">
+      <!-- Tool cards will be injected by JavaScript -->
+    </div>
+
+  </div>
+
+  <script>
+    const TOOLS_DATABASE = [
+      {
+        name: "Opus Clip",
+        category: "Video & Shorts",
+        icon: "✂️",
+        pricing: "Freemium",
+        pricingType: "pricing-freemium",
+        desc: "Turns 1 long-form YouTube video or podcast into 10 viral short-form clips with animated subtitles and hook detection.",
+        url: "https://www.opus.pro/?via=neuralvault"
+      },
+      {
+        name: "ElevenLabs",
+        category: "Audio & Voice",
+        icon: "🎙️",
+        pricing: "Freemium",
+        pricingType: "pricing-freemium",
+        desc: "Ultra-realistic text-to-speech, human voice cloning, and emotional speech generation in 32+ languages.",
+        url: "https://elevenlabs.io/?from=neuralvault"
+      },
+      {
+        name: "Gamma App",
+        category: "Presentations & Docs",
+        icon: "📊",
+        pricing: "Free Credits",
+        pricingType: "pricing-trial",
+        desc: "Generates stunning decks, presentations, and interactive documents from a one-sentence text prompt.",
+        url: "https://gamma.app/signup?via=neuralvault"
+      },
+      {
+        name: "Make.com",
+        category: "Automation & No-Code",
+        icon: "⚡",
+        pricing: "Freemium",
+        pricingType: "pricing-freemium",
+        desc: "Visual workflow automation platform connecting 1,000+ apps to build autonomous multi-agent pipelines.",
+        url: "https://www.make.com/en/register?pc=neuralvault"
+      },
+      {
+        name: "Perplexity AI",
+        category: "Research & Search",
+        icon: "🔍",
+        pricing: "Free",
+        pricingType: "pricing-free",
+        desc: "AI conversational search engine that provides cited, direct, ad-free answers to complex questions in seconds.",
+        url: "https://www.perplexity.ai"
+      },
+      {
+        name: "Claude 3.5 Sonnet",
+        category: "Coding & Web",
+        icon: "🤖",
+        pricing: "Free",
+        pricingType: "pricing-free",
+        desc: "State-of-the-art coding, reasoning, and Artifacts feature that builds interactive web apps directly in chat.",
+        url: "https://claude.ai"
+      },
+      {
+        name: "v0.dev by Vercel",
+        category: "Coding & Web",
+        icon: "💻",
+        pricing: "Freemium",
+        pricingType: "pricing-freemium",
+        desc: "Generates full React, Tailwind, and HTML responsive user interfaces from natural language prompts.",
+        url: "https://v0.dev"
+      },
+      {
+        name: "Google NotebookLM",
+        category: "Research & Search",
+        icon: "🎧",
+        pricing: "100% Free",
+        pricingType: "pricing-free",
+        desc: "Upload PDFs, notes, and documents to generate hyper-realistic two-host conversational podcast summaries.",
+        url: "https://notebooklm.google.com"
+      },
+      {
+        name: "Kling AI",
+        category: "Video & Shorts",
+        icon: "🎬",
+        pricing: "Freemium",
+        pricingType: "pricing-freemium",
+        desc: "Cinematic text-to-video and image-to-video generator with physical simulation and camera motion controls.",
+        url: "https://klingai.com"
+      },
+      {
+        name: "Midjourney v6",
+        category: "Design & Images",
+        icon: "🎨",
+        pricing: "Paid",
+        pricingType: "pricing-trial",
+        desc: "Photorealistic image generator with fine-grained stylistic tuning, texture precision, and web editor.",
+        url: "https://midjourney.com"
+      },
+      {
+        name: "CapCut Pro",
+        category: "Video & Shorts",
+        icon: "📱",
+        pricing: "Freemium",
+        pricingType: "pricing-freemium",
+        desc: "Essential mobile & desktop editor with auto-captions, viral effects, and audio beat matching.",
+        url: "https://www.capcut.com"
+      },
+      {
+        name: "ChatPRD",
+        category: "Automation & No-Code",
+        icon: "📋",
+        pricing: "Freemium",
+        pricingType: "pricing-freemium",
+        desc: "AI Chief Product Officer that drafts product requirement documents, roadmaps, and specs in minutes.",
+        url: "https://www.chatprd.ai"
+      },
+      {
+        name: "Cursor IDE",
+        category: "Coding & Web",
+        icon: "⌨️",
+        pricing: "Freemium",
+        pricingType: "pricing-freemium",
+        desc: "AI-native code editor with multi-file reasoning, instant refactoring, and natural language code generation.",
+        url: "https://www.cursor.com"
+      },
+      {
+        name: "HeyGen",
+        category: "Video & Shorts",
+        icon: "👤",
+        pricing: "Free Trial",
+        pricingType: "pricing-trial",
+        desc: "Create photorealistic AI avatar spokesperson videos with lip-sync in 40+ languages without a camera.",
+        url: "https://www.heygen.com"
+      },
+      {
+        name: "Suno AI",
+        category: "Audio & Voice",
+        icon: "🎵",
+        pricing: "Freemium",
+        pricingType: "pricing-freemium",
+        desc: "Generates radio-quality songs with vocals, instruments, and production from a simple description.",
+        url: "https://suno.com"
+      },
+      {
+        name: "Notion AI",
+        category: "Presentations & Docs",
+        icon: "📝",
+        pricing: "Free Trial",
+        pricingType: "pricing-trial",
+        desc: "Embedded workspace assistant for summarizing meetings, writing drafts, and structuring knowledge bases.",
+        url: "https://notion.so"
+      }
+    ];
+
+    let currentCategory = 'all';
+
+    function renderTools(tools) {
+      const grid = document.getElementById('toolsGrid');
+      grid.innerHTML = '';
+
+      if (tools.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--muted);">No tools found matching your criteria.</div>';
+        document.getElementById('counterText').textContent = '0 tools found';
+        return;
+      }
+
+      document.getElementById('counterText').textContent = `Showing ${tools.length} curated tools`;
+
+      tools.forEach(t => {
+        const card = document.createElement('div');
+        card.className = 'tool-card';
+        card.innerHTML = `
+          <div>
+            <div class="card-top">
+              <span class="tool-icon">${t.icon}</span>
+              <span class="pricing-tag ${t.pricingType}">${t.pricing}</span>
+            </div>
+            <div class="tool-cat">${t.category}</div>
+            <h3 class="tool-name">${t.name}</h3>
+            <p class="tool-desc">${t.desc}</p>
+          </div>
+          <div class="card-bottom">
+            <span class="affiliate-badge">Verified ⚡</span>
+            <a href="${t.url}" target="_blank" rel="noopener" class="visit-btn">
+              Get Tool
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      const pills = document.querySelectorAll('.pill-btn');
+      pills.forEach(p => {
+        if (p.textContent.toLowerCase() === cat.toLowerCase() || (cat === 'all' && p.textContent.toLowerCase() === 'all tools')) {
+          p.classList.add('active');
+        } else {
+          p.classList.remove('active');
+        }
+      });
+      filterTools();
+    }
+
+    function filterTools() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const filtered = TOOLS_DATABASE.filter(t => {
+        const matchesCategory = currentCategory === 'all' || t.category.toLowerCase() === currentCategory.toLowerCase();
+        const matchesQuery = t.name.toLowerCase().includes(query) || 
+                             t.desc.toLowerCase().includes(query) || 
+                             t.category.toLowerCase().includes(query);
+        return matchesCategory && matchesQuery;
+      });
+      renderTools(filtered);
+    }
+
+    // Initial render
+    renderTools(TOOLS_DATABASE);
+  </script>
+</body>
+</html>
